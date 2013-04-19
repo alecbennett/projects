@@ -30,24 +30,13 @@ $.getJSON(jsonFile, function(layers) {
 	mt.addPolygon(polyList);
 });
 </pre>
-	<p>Full source code is available via the projects repo at github.com <a href="https://github.com/alecbennett/projects">here</a></p>
+	<p>Full source code is available via the projects repo at github.com <a href="https://github.com/alecbennett/projects/tree/master/loadgeojson">here</a></p>
 	</div>
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
 			init();
 			google.maps.event.addListenerOnce(map, 'idle', function(){
-				function loadPolygonGeoJSON(jsonFile){
-					$.getJSON(jsonFile, function(layers) {     
-						var polyList = [];
-						for (var i = 0; i < layers.features[0].geometry.coordinates[0].length; i++){
-							var myLatLng = new google.maps.LatLng(layers.features[0].geometry.coordinates[0][i][1], layers.features[0].geometry.coordinates[0][i][0]);
-							polyList.push(myLatLng);
-						}
-						mt.addPolygon(polyList);
-					});
-
-				}
 				function loadMultiPolygonGeoJSON(jsonFile){
 					$.getJSON(jsonFile, function(layers) {     
 						for (var i = 0; i < layers.features[0].geometry.coordinates.length; i++){
