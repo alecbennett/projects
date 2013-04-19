@@ -22,7 +22,7 @@
 		<div><h2>Earthquake Activity Map (<?php echo date("F jS, Y h:i:s A T"); ?>)</h2></div>
 		<div id="mapcanvas" style="height: 600px; width: 980px; margin: auto; border: 1px solid gray;"></div>
 		<div>
-			<p>The Earthquake Activity Map draws on data from the <a href="http://earthquake.usgs.gov" target="new">USGS</a> for incident information.  Data is obtained via the GeoJSON format, using JSONP, and placed as markers in the Google Maps API.  Currently, data is only pulled at the time of the page load.  Future updates may include re-polling of the hourly or minute data. Code is stored in the projects/eam directory drom the Github repo.</p>
+			<p>The Earthquake Activity Map draws on data from the <a href="http://earthquake.usgs.gov" target="new">USGS</a> for incident information.  Data is obtained via the GeoJSON format, using JSONP, and placed as markers in the Google Maps API.  Currently, data is only pulled at the time of the page load.  Future updates may include re-polling of the hourly or minute data. Code is stored on Github <a href="https://github.com/alecbennett/projects/tree/master/eam">here</a></p>
 		</div>
 <?php $page->SiteFooter(); ?>
 
