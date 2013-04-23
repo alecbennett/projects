@@ -5,7 +5,6 @@
 ?>
 <h1>GeoJSON Polygon Layers</h1>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"> </script>
-	<script type="text/javascript" src="/js/jsMapTools.js"></script>
 	<script type="text/javascript" src="../../js/jsplay.js"></script>
 	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" type="text/javascript"></script>
 	<div id="map_wrapper" style="width: 100%; position: relative; height: 500px;">
@@ -35,7 +34,11 @@ $.getJSON(jsonFile, function(layers) {
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
-			init();
+			map = new google.maps.Map(document.getElementById('map_canvas'), {
+				'zoom': 4,
+				'center': new google.maps.LatLng(63.5, -147),
+				'mapTypeId': google.maps.MapTypeId.ROADMAP
+			});
 			google.maps.event.addListenerOnce(map, 'idle', function(){
 				function loadMultiPolygonGeoJSON(jsonFile){
 					$.getJSON(jsonFile, function(layers) {     
