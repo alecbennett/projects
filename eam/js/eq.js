@@ -1,4 +1,5 @@
 var map;
+var loaded = false;
 var marker;
 var marker2;
 var markersArray = [];
@@ -16,9 +17,9 @@ function initialize() {
 	map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
 	//loadMapMarkers();
 }
-function loadData(){
+function loadData(equrl){
 	$.ajax({
-		url: 'http://earthquake.usgs.gov/earthquakes/feed/v0.1/summary/1.0_week.geojsonp',
+		url: equrl,
 		dataType: 'jsonp',
 		jsonp: 'callback',
 		jsonpCallback: 'eqfeed_callback',
@@ -32,8 +33,15 @@ function loadData(){
 						eqjson.features[i].properties.place,
 						eqjson.features[i].properties.time,
 						eqjson.features[i].properties.url
-					);
+					);	
+					//if (loaded == true){
+					//	var latLng = new google.maps.LatLng(eqjson.features[i].geometry.coordinates[1],
+                                        //      eqjson.features[i].geometry.coordinates[0]);
+					//	map.setZoom(8);
+					//	map.panTo(latLng);
+					//}
 				}
+				//loaded = true;
 			}
 		eqfeed_callback(data);
 	    }

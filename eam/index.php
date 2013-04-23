@@ -16,7 +16,11 @@
 		<script type="text/javascript">
 			$(document).ready(function(){ 
 				initialize(); 
-				loadData();
+				loadData('http://earthquake.usgs.gov/earthquakes/feed/v0.1/summary/1.0_week.geojsonp');
+				//window.setInterval(function() {
+				//	loadData('http://earthquake.usgs.gov/earthquakes/feed/v0.1/summary/all_hour.geojsonp');
+				//}, 60000);
+
 			});
 		</script>
 		<div><h2>Earthquake Activity Map (<?php echo date("F jS, Y h:i:s A T"); ?>)</h2></div>
