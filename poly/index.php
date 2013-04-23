@@ -5,7 +5,7 @@
 ?>
 <h1>Polygon Selection Tool</h1>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"> </script>
-	<script type="text/javascript" src="../jsMapTools/js/jsMapTools.js"></script>
+	<script type="text/javascript" src="/js/jsMapTools.js"></script>
 	<script type="text/javascript">
 		google.maps.event.addDomListener(window, 'load', init);
 		setPointLayer("pointDisplay");
