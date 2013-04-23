@@ -34,14 +34,14 @@ function loadData(equrl){
 						eqjson.features[i].properties.time,
 						eqjson.features[i].properties.url
 					);	
-					//if (loaded == true){
-					//	var latLng = new google.maps.LatLng(eqjson.features[i].geometry.coordinates[1],
-                                        //      eqjson.features[i].geometry.coordinates[0]);
-					//	map.setZoom(8);
-					//	map.panTo(latLng);
-					//}
+					if (loaded == true){
+						var latLng = new google.maps.LatLng(eqjson.features[i].geometry.coordinates[1],
+                                              eqjson.features[i].geometry.coordinates[0]);
+						map.setZoom(8);
+						map.panTo(latLng);
+					}
 				}
-				//loaded = true;
+				loaded = true;
 			}
 		eqfeed_callback(data);
 	    }
@@ -57,13 +57,26 @@ function addMarker(myLat,myLong,myMag,myLoc,myDate,myEvent){
 			myHtml += "<div style='font-size: 12px; margin-top: 5px;'>Time: <span style='color: #000000;'>" +  myDate + "</span></div>";
 			myHtml += "<div style='font-size: 12px;'>Event ID: <span style='color: #000000;'><a href='" + myLink + "' target='new'>" +  myEvent + "</a></span></div>";
 			myHtml += "</div>";
-		var myIcon = "earthquake_";
-		if (myMag < "3.0"){ myIcon += "3"; }
+		//alert(new Date().getTime());
+		//alert(myDate + " " + new Date().getTime());
+		var timeDiff = (new Date().getTime()) - myDate;
+		//alert(timeDiff + " " + 3600*24*100);
+		if (timeDiff < (3600*3*1000)){
+			var myIcon = "img/red_";
+		} else if (timeDiff < (3600*24*1000)){
+			var myIcon = "img/dodgerblue_";
+		} else {
+			var myIcon = "img/yellow_";
+		}
+		if (myMag < "1.0"){ myIcon += "1"; }
+		else if (myMag < "2.0"){ myIcon += "2"; }
+		else if (myMag < "3.0"){ myIcon += "3"; }
 		else if (myMag < "4.0"){ myIcon += "4"; }
 		else if (myMag < "5.0"){ myIcon += "5"; }
 		else if (myMag < "6.0"){ myIcon += "6"; }
 		else if (myMag < "7.0"){ myIcon += "7"; }
-		else if (myMag >= "7.0"){ myIcon += "max"; }
+		else if (myMag < "8.0"){ myIcon += "8"; }
+		else if (myMag >= "8.0"){ myIcon += "max"; }
 		myIcon += ".png";
 		marker = new google.maps.Marker({
 		  map: map,
