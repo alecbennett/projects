@@ -58,14 +58,14 @@ function addMarker(myLat,myLong,myMag,myLoc,myDate,myEvent){
 			myHtml += "<div style='font-size: 12px; margin-top: 5px;'>Time: <span style='color: #000000;'>" +  myDate + "</span></div>";
 			myHtml += "<div style='font-size: 12px;'>Event ID: <span style='color: #000000;'><a href='" + myLink + "' target='new'>" +  myEvent + "</a></span></div>";
 			myHtml += "</div>";
-		//alert(new Date().getTime());
-		//alert(myDate + " " + new Date().getTime());
 		var timeDiff = (new Date().getTime()) - myDate;
-		//alert(timeDiff + " " + 3600*24*100);
+		var myZ = myMag;
 		if (timeDiff < (3600*3*1000)){
 			var myIcon = "img/red_";
+			myZ += 20;
 		} else if (timeDiff < (3600*24*1000)){
 			var myIcon = "img/dodgerblue_";
+			myZ += 10;
 		} else {
 			var myIcon = "img/yellow_";
 		}
@@ -79,7 +79,6 @@ function addMarker(myLat,myLong,myMag,myLoc,myDate,myEvent){
 		else if (myMag < "8.0"){ myIcon += "8"; }
 		else if (myMag >= "8.0"){ myIcon += "9"; }
 		myIcon += ".png";
-		var myZ = myMag;
 		marker = new google.maps.Marker({
 		  map: map,
 		  position: new google.maps.LatLng(myLat, myLong),
