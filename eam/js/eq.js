@@ -11,6 +11,7 @@ function initialize() {
 
 	var myOptions = {
 		zoom: 3,
+		minZoom: 3,
 		center: latlng,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
@@ -76,7 +77,7 @@ function addMarker(myLat,myLong,myMag,myLoc,myDate,myEvent){
 		else if (myMag < "6.0"){ myIcon += "6"; }
 		else if (myMag < "7.0"){ myIcon += "7"; }
 		else if (myMag < "8.0"){ myIcon += "8"; }
-		else if (myMag >= "8.0"){ myIcon += "max"; }
+		else if (myMag >= "8.0"){ myIcon += "9"; }
 		myIcon += ".png";
 		marker = new google.maps.Marker({
 		  map: map,
