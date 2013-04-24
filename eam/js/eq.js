@@ -79,12 +79,14 @@ function addMarker(myLat,myLong,myMag,myLoc,myDate,myEvent){
 		else if (myMag < "8.0"){ myIcon += "8"; }
 		else if (myMag >= "8.0"){ myIcon += "9"; }
 		myIcon += ".png";
+		var myZ = myMag;
 		marker = new google.maps.Marker({
 		  map: map,
 		  position: new google.maps.LatLng(myLat, myLong),
 		  draggable: false,
 		  icon: "http://maps.google.com/mapfiles/ms/icons/red.png",
 		  icon: myIcon,
+		  zIndex: myZ,
 		  html: myHtml
 		});
 		 var infowindow = new google.maps.InfoWindow({  

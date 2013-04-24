@@ -20,7 +20,20 @@
 				//window.setInterval(function() {
 				//	loadData('http://earthquake.usgs.gov/earthquakes/feed/v0.1/summary/all_hour.geojsonp');
 				//}, 60000);
+				google.maps.event.addListenerOnce(map, 'idle', function(){
+					if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(
+							function( position ){
+								marker = new google.maps.Marker({
+								  map: map,
+								  position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+								  draggable: false,
+								  icon: "http://maps.google.com/mapfiles/ms/icons/red.png",
+								});
 
+						});
+					}
+				});
 			});
 		</script>
 		<div><h2>Earthquake Activity Map (<?php echo date("F jS, Y h:i:s A T"); ?>)</h2></div>
