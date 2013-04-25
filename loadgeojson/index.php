@@ -5,7 +5,7 @@
 ?>
 <h1>GeoJSON Polygon Layers</h1>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"> </script>
-	<script type="text/javascript" src="../../js/jsplay.js"></script>
+	<script type="text/javascript" src="/projects/jsmaptools/js/jsmaptools.js"></script>
 	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" type="text/javascript"></script>
 	<div id="map_wrapper" style="width: 100%; position: relative; height: 500px;">
 		<div id="map_canvas" style="border: 1px solid #999; height: 100%; width: 100%; float: right;"></div>
