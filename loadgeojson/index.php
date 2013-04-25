@@ -41,7 +41,24 @@ $.getJSON(jsonFile, function(layers) {
 			});
 			google.maps.event.addListenerOnce(map, 'idle', function(){
 				var mt = new MapTools(map);
-				mt.readGeoJSON("my.json");
+				mt.readGeoJSON("usa.geo.json");
+				for (var i = 0; i < mt.features.length; i++){
+					var feat = mt.features[i];
+					if (feat.type == "MultiPolygon"){
+						feat.signalPolygons(function(iter, tfeat=feat){
+							google.maps.event.addListener(tfeat.polyArray[iter].gMap,"mouseover",function(){
+								for (var j = 0; j < tfeat.polyArray.length; j++){
+									tfeat.polyArray[j].gMap.setOptions({fillColor: "#ff0000"});
+								}
+							});
+							google.maps.event.addListener(tfeat.polyArray[iter].gMap,"mouseout",function(){
+								for (var j = 0; j < tfeat.polyArray.length; j++){
+									tfeat.polyArray[j].gMap.setOptions({fillColor: "#222222"});
+								}
+							});
+						});
+					}
+				}
 			});
 		});
 
