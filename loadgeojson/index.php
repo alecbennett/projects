@@ -35,8 +35,8 @@ $.getJSON(jsonFile, function(layers) {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			map = new google.maps.Map(document.getElementById('map_canvas'), {
-				'zoom': 4,
-				'center': new google.maps.LatLng(63.5, -147),
+				'zoom': 3,
+				'center': new google.maps.LatLng(53, -120),
 				'mapTypeId': google.maps.MapTypeId.ROADMAP
 			});
 			google.maps.event.addListenerOnce(map, 'idle', function(){
