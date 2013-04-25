@@ -2,6 +2,7 @@ var map;
 var loaded = false;
 var marker;
 var marker2;
+var num = ( 3600 * 24 * 365 * 40);
 var markersArray = [];
 var infoArray = [];
 function resize(){ }
@@ -37,7 +38,7 @@ function loadData(equrl){
 					);	
 					if (loaded == true){
 						var latLng = new google.maps.LatLng(eqjson.features[i].geometry.coordinates[1],
-                                              eqjson.features[i].geometry.coordinates[0]);
+                                                eqjson.features[i].geometry.coordinates[0]);
 						map.setZoom(8);
 						map.panTo(latLng);
 					}
@@ -48,6 +49,7 @@ function loadData(equrl){
 	    }
 	});
 }
+
 function addMarker(myLat,myLong,myMag,myLoc,myDate,myEvent){
 	if (myMag >= minMag){
 		var myLatLong = new google.maps.LatLng(myLat,myLong);
@@ -68,7 +70,8 @@ function addMarker(myLat,myLong,myMag,myLoc,myDate,myEvent){
 			myZ += 10;
 		} else {
 			var myIcon = "img/yellow_";
-		}
+		}	
+		myZ = 10 + (myDate - num);
 		if (myMag < "1.0"){ myIcon += "1"; }
 		else if (myMag < "2.0"){ myIcon += "2"; }
 		else if (myMag < "3.0"){ myIcon += "3"; }

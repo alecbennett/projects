@@ -40,20 +40,8 @@ $.getJSON(jsonFile, function(layers) {
 				'mapTypeId': google.maps.MapTypeId.ROADMAP
 			});
 			google.maps.event.addListenerOnce(map, 'idle', function(){
-				function loadMultiPolygonGeoJSON(jsonFile){
-					$.getJSON(jsonFile, function(layers) {     
-						for (var i = 0; i < layers.features[0].geometry.coordinates.length; i++){
-							var polyList = [];
-							for (var j = 0; j < layers.features[0].geometry.coordinates[i][0].length; j++){
-								var myLatLng = new google.maps.LatLng(layers.features[0].geometry.coordinates[i][0][j][1], layers.features[0].geometry.coordinates[i][0][j][0]);
-								polyList.push(myLatLng);
-							}
-							mt.addPolygon(polyList);
-						}
-					});
-				}
 				var mt = new MapTools(map);
-				loadMultiPolygonGeoJSON("usa.geo.json");
+				mt.readGeoJSON("my.json");
 			});
 		});
 
