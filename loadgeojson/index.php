@@ -13,7 +13,7 @@
 	</div>
 
 	<div>
-		<p>Loading Polygon and MultiPolygons from GeoJSON files using jQuery, and populating a < href="https://github.com/alecbennett/jsmaptools">jsmaptools</a> object.  This loads a GeoJSON file for the USA, containing MultiPolygons which include Alaska, Hawaii, and the Continental US.</p>
+		<p>Loading Polygon and MultiPolygons from GeoJSON files using jQuery, and populating a <a href="https://github.com/alecbennett/jsmaptools">jsmaptools</a> object.  This loads a GeoJSON file for the USA, containing MultiPolygons which include Alaska, Hawaii, and the Continental US.</p>
 		<p>
 			The core of this is in using the jQuery $.getJSON() function.  The file itself is loaded into an object (in this case "layers") and then you can iterate through the array for features.  Each feature has one set of geometry with one or more coordinates.
 		</p>
