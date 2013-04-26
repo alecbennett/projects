@@ -38,7 +38,9 @@
 		</script>
 		<div><h2>Earthquake Activity Map (<?php echo date("F jS, Y h:i:s A T"); ?>)</h2></div>
 		<div style="position: relative;">
-			<div id="mapcanvas" style="height: 600px; width: 980px; margin: auto; border: 1px solid gray;"></div>
+			<div id="mapcanvas" style="height: 600px; width: 980px; margin: auto; border: 1px solid gray;">
+				<noscript><div class="noScriptDemo">JavaScript Must Be Enabled for this demo</div></noscript>	
+			</div>
 			<div style="position: absolute; bottom: 30px; right: 20px; opacity: 0.6; color: black; background-color: #888888; width: 290px; text-align: center; height: 42px; border: 1px solid black; line-height: 42px; border-radius: 5px; padding: 5px; vertical-align: middle;">
 				<img src="img/white_1.png" />
 				<img src="img/white_2.png" />

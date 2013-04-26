@@ -8,8 +8,9 @@
 	<script type="text/javascript" src="../jsmaptools/js/jsmaptools.js"></script>
 	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" type="text/javascript"></script>
 	<div id="map_wrapper" style="width: 100%; position: relative; height: 500px;">
-		<div id="map_canvas" style="border: 1px solid #999; height: 100%; width: 100%; float: right;"></div>
-
+		<div id="map_canvas" style="border: 1px solid #999; height: 100%; width: 100%; float: right;">
+			<noscript><div class="noScriptDemo">JavaScript Must Be Enabled for this demo</div></noscript>	
+		</div>
 	</div>
 
 	<div>
@@ -34,7 +35,7 @@ $.getJSON(jsonFile, function(layers) {
 </pre>
 	<p>Full source code is available via the projects repo at github.com <a href="https://github.com/alecbennett/projects/tree/master/loadgeojson">here</a>. The polgyon used in this example is quite simplistic, but the code also works well with much more complex files.</p>
 	</div>
-	
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			map = new google.maps.Map(document.getElementById('map_canvas'), {
