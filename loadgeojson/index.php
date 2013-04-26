@@ -49,7 +49,8 @@ $.getJSON(jsonFile, function(layers) {
 				for (var i = 0; i < mt.features.length; i++){
 					var feat = mt.features[i];
 					if (feat.type == "MultiPolygon"){
-						feat.signalPolygons(function(iter, tfeat=feat){
+						feat.signalPolygons(function(iter){
+							var tfeat=feat;
 							google.maps.event.addListener(tfeat.polyArray[iter].gMap,"mouseover",function(){
 								$.each(tfeat.polyArray, function(i,v){ tfeat.polyArray[i].gMap.setOptions({fillColor: "#ff0000"}); });
 							});
