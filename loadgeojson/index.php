@@ -3,7 +3,7 @@
 	$page = new webPage("Polygon Selection");
 	$page->SiteHeader();
 ?>
-<h1>GeoJSON Polygon Layers</h1>
+<h1>GeoJSON (Multi)Polygon Layers</h1>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"> </script>
 	<script type="text/javascript" src="../jsmaptools/js/jsmaptools.js"></script>
 	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" type="text/javascript"></script>
@@ -50,14 +50,10 @@ $.getJSON(jsonFile, function(layers) {
 					if (feat.type == "MultiPolygon"){
 						feat.signalPolygons(function(iter, tfeat=feat){
 							google.maps.event.addListener(tfeat.polyArray[iter].gMap,"mouseover",function(){
-								for (var j = 0; j < tfeat.polyArray.length; j++){
-									tfeat.polyArray[j].gMap.setOptions({fillColor: "#ff0000"});
-								}
+								$.each(tfeat.polyArray, function(i,v){ tfeat.polyArray[i].gMap.setOptions({fillColor: "#ff0000"}); });
 							});
 							google.maps.event.addListener(tfeat.polyArray[iter].gMap,"mouseout",function(){
-								for (var j = 0; j < tfeat.polyArray.length; j++){
-									tfeat.polyArray[j].gMap.setOptions({fillColor: "#222222"});
-								}
+								$.each(tfeat.polyArray, function(i,v){ tfeat.polyArray[i].gMap.setOptions({fillColor: "#222222"}); });
 							});
 						});
 					}
