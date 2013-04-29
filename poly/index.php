@@ -16,8 +16,8 @@
 		</div>
 
 		<div style="width: 400px;">
-			<p>Draw a polygon by clicking on the "Draw Polygon" button, and then selecting points on the map.  Close the polygon by selecting the first point on the map (the one with the dot).</p>
-			<textarea type="text" id="pointDisplay" readonly="readonly" style="width: 395px; height: 300px;" ></textarea>
+			<p>Draw a polygon by clicking on the "Draw Polygon" button, and then selecting points on the map.  Close the polygon by selecting the first point on the map (the one with the dot).  Output is now produced in GeoJSON format.</p>
+			<textarea type="text" id="pointDisplay" readonly="readonly" style="width: 395px; height: 275px;" ></textarea>
 			<input type="button" onclick="drawPolygon();" value="Draw Polygon" style="margin-top: 5px; width: 400px; height: 75px;" />
 		</div>
 		<div id="pointDisplay"></div>

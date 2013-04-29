@@ -232,6 +232,7 @@
 	}
 	function updatePointList(){
 		var jsonString = '{"type":"FeatureCollection",\n  "features":[{\n    "type":"Feature",';
+		jsonString += '\n    "properties":{\n      "prop0": "value0"\n    },';
 		jsonString += '\n    "geometry":{\n      "type":"Polygon",\n      "coordinates":[[\n';
 
 		if (document.getElementById(pointLayer)){
