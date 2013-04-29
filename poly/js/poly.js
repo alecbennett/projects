@@ -155,6 +155,20 @@
 		updatePointList();
 	}
 	function closePoly(){
+		var polyArea = google.maps.geometry.spherical.computeArea(point_list);
+		var infoContent = "<div>Area of Polygon: ";
+		infoContent += "<div>" + Math.round(polyArea*100)/100 + " m<sup>2</sup></div>";
+		infoContent += "<div>" + Math.round(10.764*polyArea*100)/100 + " ft<sup>2</sup></div>";
+		infoContent += "</div>";
+		var infoWindow = new google.maps.InfoWindow({
+			content: infoContent
+		});
+
+		google.maps.event.addListener(polygon, 'click', function(e){
+			var myloc = e.latLng;
+			infoWindow.setPosition(myloc);
+			infoWindow.open(map);
+         	});
 		polygon.setPaths(point_list);
 		polygon.setMap(map);
 		polyline.setMap(null);
@@ -162,9 +176,7 @@
 		for (var i = 0; i < marker_list.length; i++){
 			marker_list[i].setMap(null);
 		}
-		google.maps.event.addListener(polygon,"click",function(){
-			alert("You clicked a Polygon");
-		}); 
+
 		google.maps.event.addListener(polygon,"mouseover",function(){
 		 this.setOptions({fillColor: "#00FF00"});
 		}); 
@@ -231,18 +243,32 @@
 		updatePointList();
 	}
 	function updatePointList(){
+		var myJSON = {"type":"FeatureCollection"};
+		myJSON.features = [{"type":"Feature"}];
+		myJSON.features[0].properties = {"prop0":"value0"};
+		myJSON.features[0].geometry = {"type":"Polygon"};
+		myJSON.features[0].geometry.coordinates = [[]];
 		var jsonString = '{"type":"FeatureCollection",\n  "features":[{\n    "type":"Feature",';
 		jsonString += '\n    "properties":{\n      "prop0": "value0"\n    },';
 		jsonString += '\n    "geometry":{\n      "type":"Polygon",\n      "coordinates":[[\n';
-
 		if (document.getElementById(pointLayer)){
+			myJSON.features[0].geometry.coordinates[0].push([marker_list[0].getPosition().lng(),marker_list[0].getPosition().lat()]);
 			jsonString += '        [' + marker_list[0].getPosition().lng() + ',' + marker_list[0].getPosition().lat() + ']';
 			for (var i = 1; i < marker_list.length; i++){
+				myJSON.features[0].geometry.coordinates[0].push([marker_list[i].getPosition().lng(),marker_list[i].getPosition().lat()]);
 				jsonString += ',\n        [' + marker_list[i].getPosition().lng() + ',' + marker_list[i].getPosition().lat() + ']';
 			}
 			jsonString += '\n      ]]\n    }\n  }]\n}';
 			document.getElementById(pointLayer).innerHTML = jsonString;
 		}
+	}
+	function getArea(pA){
+		var A = 0;
+		for (var i = 0; i < pA.length; i++){
+			var pX = (i+1) % pA.length; //Wrap for end of array issues
+			A += pA[i][1]*pA[pX][0] - pA[pX][1]*pA[i][0];
+		}
+		return 0.5*(Math.abs(A));	
 	}
 	function setPointLayer(layername){
 		pointLayer = layername;
