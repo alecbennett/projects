@@ -231,12 +231,16 @@
 		updatePointList();
 	}
 	function updatePointList(){
+		var jsonString = '{"type":"FeatureCollection",\n  "features":[{\n    "type":"Feature",';
+		jsonString += '\n    "geometry":{\n      "type":"Polygon",\n      "coordinates":[[\n';
+
 		if (document.getElementById(pointLayer)){
-			var coordinate_list = "";
-			for (var i = 0; i < marker_list.length; i++){
-				coordinate_list += "P" + (i + 1) + ": " + marker_list[i].getPosition() + "\n";
+			jsonString += '        [' + marker_list[0].getPosition().lng() + ',' + marker_list[0].getPosition().lat() + ']';
+			for (var i = 1; i < marker_list.length; i++){
+				jsonString += ',\n        [' + marker_list[i].getPosition().lng() + ',' + marker_list[i].getPosition().lat() + ']';
 			}
-			document.getElementById(pointLayer).innerHTML = coordinate_list;
+			jsonString += '\n      ]]\n    }\n  }]\n}';
+			document.getElementById(pointLayer).innerHTML = jsonString;
 		}
 	}
 	function setPointLayer(layername){
