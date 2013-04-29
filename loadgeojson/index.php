@@ -47,18 +47,13 @@ $.getJSON(jsonFile, function(layers) {
 				var mt = new MapTools(map);
 				mt.readGeoJSON("usa.geo.json");
 				for (var i = 0; i < mt.features.length; i++){
-					var feat = mt.features[i];
-					if (feat.type == "MultiPolygon"){
-						feat.signalPolygons(function(iter){
-							var tfeat=feat;
-							google.maps.event.addListener(tfeat.polyArray[iter].gMap,"mouseover",function(){
-								$.each(tfeat.polyArray, function(i,v){ tfeat.polyArray[i].gMap.setOptions({fillColor: "#ff0000"}); });
-							});
-							google.maps.event.addListener(tfeat.polyArray[iter].gMap,"mouseout",function(){
-								$.each(tfeat.polyArray, function(i,v){ tfeat.polyArray[i].gMap.setOptions({fillColor: "#222222"}); });
-							});
-						});
-					}
+					var poly = mt.features[i];
+					google.maps.event.addListener(poly.gMap,"mouseover",function(){
+						this.setOptions({fillColor: "#CC1493"});
+					});
+					google.maps.event.addListener(poly.gMap,"mouseout",function(){
+						this.setOptions({fillColor: "#cccccc"});
+					});
 				}
 			});
 		});
