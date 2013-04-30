@@ -1,23 +1,15 @@
 var map;
 var loaded = false;
-var marker;
-var marker2;
 var num = ( 3600 * 24 * 365 * 40);
 var markersArray = [];
-var infoArray = [];
-function resize(){ }
 
 function initialize() {
-	var latlng = new google.maps.LatLng(50.397, -110.644);
-
-	var myOptions = {
-		zoom: 3,
-		minZoom: 3,
-		center: latlng,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	};
-	map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
-	//loadMapMarkers();
+	map = new L.Map('map');
+	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	var osmAttrib='Map data © OpenStreetMap contributors';
+	var osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 12, attribution: osmAttrib});		
+	map.setView(new L.LatLng(60.3, -147),4);
+	map.addLayer(osm);
 }
 function loadData(equrl){
 	$.ajax({
@@ -25,7 +17,7 @@ function loadData(equrl){
 		dataType: 'jsonp',
 		jsonp: 'callback',
 		jsonpCallback: 'eqfeed_callback',
-		success: function(data){// your code here
+		success: function(data){
 			function eqfeed_callback(eqjson){
 				for (var i = 0; i < eqjson.features.length; i++){
 					addMarker(
@@ -37,10 +29,9 @@ function loadData(equrl){
 						eqjson.features[i].properties.url
 					);	
 					if (loaded == true){
-						var latLng = new google.maps.LatLng(eqjson.features[i].geometry.coordinates[1],
-                                                eqjson.features[i].geometry.coordinates[0]);
-						map.setZoom(8);
-						map.panTo(latLng);
+						var latLng = new L.LatLng([eqjson.features[i].geometry.coordinates[0], eqjson.features[i].geometry.coordinates[1]]);
+						//map.setZoom(8);
+						//map.panTo(latLng);
 					}
 				}
 				loaded = true;
@@ -52,7 +43,7 @@ function loadData(equrl){
 
 function addMarker(myLat,myLong,myMag,myLoc,myDate,myEvent){
 	if (myMag >= minMag){
-		var myLatLong = new google.maps.LatLng(myLat,myLong);
+		var myLatLong = new L.LatLng(myLat,myLong);
 		var myLink = myEvent;
 		var myHtml = "<div style='color: #777777; margin: 10px;'>";
 			myHtml += "<div style='font-weight: bold; font-size: 13px; color: #000000'>" + myLoc + "</div>";
@@ -63,44 +54,36 @@ function addMarker(myLat,myLong,myMag,myLoc,myDate,myEvent){
 		var timeDiff = (new Date().getTime()) - myDate;
 		var myZ = myMag;
 		if (timeDiff < (3600*3*1000)){
-			var myIcon = "img/red_";
-			myZ += 20;
-		} else if (timeDiff < (3600*24*1000)){
-			var myIcon = "img/dodgerblue_";
-			myZ += 10;
-		} else {
-			var myIcon = "img/yellow_";
-		}	
+                       var myIcon = "img/red_";
+                       var iconColor = "red";
+               } else if (timeDiff < (3600*24*1000)){
+                       var myIcon = "img/dodgerblue_";
+                       var iconColor = "blue";
+               } else {
+                       var myIcon = "img/yellow_";
+                       var iconColor = "yellow";
+               }
 		myZ = 10 + (myDate - num);
 		if (myMag < "1.0"){ myIcon += "1"; }
-		else if (myMag < "2.0"){ myIcon += "2"; }
-		else if (myMag < "3.0"){ myIcon += "3"; }
-		else if (myMag < "4.0"){ myIcon += "4"; }
-		else if (myMag < "5.0"){ myIcon += "5"; }
-		else if (myMag < "6.0"){ myIcon += "6"; }
-		else if (myMag < "7.0"){ myIcon += "7"; }
-		else if (myMag < "8.0"){ myIcon += "8"; }
-		else if (myMag >= "8.0"){ myIcon += "9"; }
-		myIcon += ".png";
-		marker = new google.maps.Marker({
-		  map: map,
-		  position: new google.maps.LatLng(myLat, myLong),
-		  draggable: false,
-		  icon: "http://maps.google.com/mapfiles/ms/icons/red.png",
-		  icon: myIcon,
-		  zIndex: myZ,
-		  html: myHtml
+               else if (myMag < "2.0"){ myIcon += "2"; }
+               else if (myMag < "3.0"){ myIcon += "3"; }
+               else if (myMag < "4.0"){ myIcon += "4"; }
+               else if (myMag < "5.0"){ myIcon += "5"; }
+               else if (myMag < "6.0"){ myIcon += "6"; }
+               else if (myMag < "7.0"){ myIcon += "7"; }
+               else if (myMag < "8.0"){ myIcon += "8"; }
+               else if (myMag >= "8.0"){ myIcon += "9"; }
+               myIcon += ".png";
+		var mapIcon = L.icon({
+		    iconUrl: myIcon,		
 		});
-		 var infowindow = new google.maps.InfoWindow({  
-		  content: myLoc
-		});  
-		markersArray.push(marker);
-		infoArray.push(infowindow);
-
-		    google.maps.event.addListener(markersArray[markersArray.length - 1], 'click', function() {  
-			var tmp_info = infoArray[infoArray.length - 1];
-			tmp_info.setContent(this.html);  
-			tmp_info.open(map, this);  
-	    });  
+		var circle = L.circle([51.508, -0.11], 500, {
+		    color: iconColor,
+		    fillColor: iconColor,
+		    fillOpacity: 0.5
+		}).addTo(map);
+		var marker = L.marker([myLat, myLong], {icon: mapIcon}).addTo(map);
+		marker.bindPopup(myHtml);
+		markersArray.push(circle);
 	}
 }
