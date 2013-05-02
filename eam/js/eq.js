@@ -29,9 +29,8 @@ function loadData(equrl){
 						eqjson.features[i].properties.url
 					);	
 					if (loaded == true){
-						var latLng = new L.LatLng([eqjson.features[i].geometry.coordinates[0], eqjson.features[i].geometry.coordinates[1]]);
-						//map.setZoom(8);
-						//map.panTo(latLng);
+						var latLng = new L.LatLng([eqjson.features[i].geometry.coordinates[1], eqjson.features[i].geometry.coordinates[0]]);
+						//map.panBy(new L.LatLng(eqjson.features[i].geometry.coordinates[1], eqjson.features[i].geometry.coordinates[0]));
 					}
 				}
 				loaded = true;
