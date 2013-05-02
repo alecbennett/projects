@@ -3,7 +3,17 @@
 	$page = new webPage("Polygon Selection");
 	$page->SiteHeader();
 ?>
-<h1>Polygon Selection Tool</h1>
+<div style="width: 100%; height:60px; margin-bottom: 10px;"><div style="display: inline-block;"><h1>Polygon Selection Tool</h1></div><div style="display: inline-block; width: 234px; height: 60px; float: right;"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-1195803658795155";
+/* ProjectAd */
+google_ad_slot = "2032017167";
+google_ad_width = 234;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div></div>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"> </script>
 	<script type="text/javascript" src="js/poly.js"></script>
 	<script type="text/javascript">
