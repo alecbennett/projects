@@ -14,11 +14,12 @@ google_ad_height = 60;
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script></div></div>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"> </script>
 	<script type="text/javascript" src="../jsmaptools/js/jsmaptools.js"></script>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+	 <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
 	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" type="text/javascript"></script>
 	<div id="map_wrapper" style="width: 100%; position: relative; height: 500px;">
-		<div id="map_canvas" style="border: 1px solid #999; height: 100%; width: 100%; float: right;">
+		<div id="map" style="border: 1px solid #999; height: 100%; width: 100%; float: right;">
 			<noscript><div class="noScriptDemo">JavaScript Must Be Enabled for this demo</div></noscript>	
 		</div>
 	</div>
@@ -48,24 +49,16 @@ $.getJSON(jsonFile, function(layers) {
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-			map = new google.maps.Map(document.getElementById('map_canvas'), {
-				'zoom': 3,
-				'center': new google.maps.LatLng(53, -120),
-				'mapTypeId': google.maps.MapTypeId.ROADMAP
-			});
-			google.maps.event.addListenerOnce(map, 'idle', function(){
-				var mt = new MapTools(map);
-				mt.readGeoJSON("usa.geo.json");
-				for (var i = 0; i < mt.features.length; i++){
-					var poly = mt.features[i];
-					google.maps.event.addListener(poly.gMap,"mouseover",function(){
-						this.setOptions({fillColor: "#CC1493"});
-					});
-					google.maps.event.addListener(poly.gMap,"mouseout",function(){
-						this.setOptions({fillColor: "#cccccc"});
-					});
-				}
-			});
+			map = new L.Map('map');
+			var apikey = 'ea24b4e5fd234fe08d4250a1f833b308';
+			var mapUrl='http://{s}.tile.cloudmade.com/' + apikey + '/94389/256/{z}/{x}/{y}.png';
+			var mapAttrib='Map data © OpenStreetMap contributors';
+			var mapLayer = new L.TileLayer(mapUrl, {minZoom: 3, maxZoom: 17, attribution: mapAttrib});
+			map.setView(new L.LatLng(50, -115),3);
+			map.addLayer(mapLayer);
+
+			var mt = new MapTools(map);
+			mt.readGeoJSON("usa.geo.json");
 		});
 
 	</script>
