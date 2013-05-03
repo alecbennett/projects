@@ -29,7 +29,7 @@ function loadData(equrl){
 						eqjson.features[i].properties.time,
 						eqjson.features[i].properties.url
 					);	
-					if (loaded == true && eqjson.features[i].properties.mag >= min){
+					if (loaded == true && eqjson.features[i].properties.mag >= minMag){
 						map.panTo([eqjson.features[i].geometry.coordinates[1], eqjson.features[i].geometry.coordinates[0]]);
 					}
 				}
@@ -44,7 +44,7 @@ function addMarker(myLat,myLong,myMag,myLoc,myDate,myEvent){
 	if (myMag >= minMag){
 		var myLatLong = new L.LatLng(myLat,myLong);
 		var myLink = myEvent;
-		var myHtml = "<div style='color: #777777; margin: 10px;'>";
+		var myHtml = "<div style='color: #777777; padding: 5px;margin: 10px;'>";
 			myHtml += "<div style='font-weight: bold; font-size: 13px; color: #000000'>" + myLoc + "</div>";
 			myHtml += "<div style='font-size: 14px; margin-top: 5px;'>Magnitude: <span style='color: #000000;'>" +  myMag + "</span></div>";
 			myHtml += "<div style='font-size: 12px; margin-top: 5px;'>Time: <span style='color: #000000;'>" +  myDate + "</span></div>";
