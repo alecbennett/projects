@@ -5,7 +5,8 @@ var markersArray = [];
 
 function initialize() {
 	map = new L.Map('map');
-	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	var apikey = 'ea24b4e5fd234fe08d4250a1f833b308';
+	var osmUrl='http://{s}.tile.cloudmade.com/' + apikey + '/94389/256/{z}/{x}/{y}.png';
 	var osmAttrib='Map data © OpenStreetMap contributors';
 	var osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 12, attribution: osmAttrib});		
 	map.setView(new L.LatLng(60.3, -147),4);
@@ -28,9 +29,8 @@ function loadData(equrl){
 						eqjson.features[i].properties.time,
 						eqjson.features[i].properties.url
 					);	
-					if (loaded == true){
-						var latLng = new L.LatLng([eqjson.features[i].geometry.coordinates[1], eqjson.features[i].geometry.coordinates[0]]);
-						//map.panBy(new L.LatLng(eqjson.features[i].geometry.coordinates[1], eqjson.features[i].geometry.coordinates[0]));
+					if (loaded == true && eqjson.features[i].properties.mag >= min){
+						map.panTo([eqjson.features[i].geometry.coordinates[1], eqjson.features[i].geometry.coordinates[0]]);
 					}
 				}
 				loaded = true;
