@@ -9,7 +9,7 @@ function initialize() {
 	var osmUrl='http://{s}.tile.cloudmade.com/' + apikey + '/94389/256/{z}/{x}/{y}.png';
 	var osmAttrib='Map data © OpenStreetMap contributors';
 	var osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 12, attribution: osmAttrib});		
-	map.setView(new L.LatLng(60.3, -147),4);
+	map.setView(new L.LatLng(50, -115),3);
 	map.addLayer(osm);
 }
 function loadData(equrl){
