@@ -17,7 +17,7 @@
 		var apikey = 'ea24b4e5fd234fe08d4250a1f833b308';
 		var mapUrl='http://{s}.tile.cloudmade.com/' + apikey + '/94389/256/{z}/{x}/{y}.png';
 		var mapAttrib='Map data © OpenStreetMap contributors';
-		var mapLayer = new L.TileLayer(mapUrl, {minZoom: 3, maxZoom: 12, attribution: mapAttrib});
+		var mapLayer = new L.TileLayer(mapUrl, {minZoom: 3, maxZoom: 17, attribution: mapAttrib});
 		map.setView(new L.LatLng(50, -115),3);
 		map.addLayer(mapLayer);
       	}
