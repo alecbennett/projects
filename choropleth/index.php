@@ -17,7 +17,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	<script type="text/javascript" src="../jsmaptools/js/jsmaptools.js"></script>
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
 	 <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
-	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" type="text/javascript"></script>
 	<div id="map_wrapper" style="width: 100%; position: relative; height: 500px;">
 		<div id="map" style="border: 1px solid #999; height: 100%; width: 100%; float: right;">
 			<noscript><div class="noScriptDemo">JavaScript Must Be Enabled for this demo</div></noscript>	
@@ -26,7 +25,13 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 	<div>
 		<p>
+		Application of the Choropleth is added by using the .addChoropleth('property','color1','color2') function in jsmaptools.  The following 3 lines load a GeoJSON file and apply the Choropleth for this map:
 		</p>
+<pre style="font-size: 14px;"><code>
+var mt = new MapTools(map);
+mt.readGeoJSON("us-states.json");
+mt.applyChoropleth('murder','#ffff00', '#ff0000');
+</pre></code>
 	<p>Full source code is available via the projects repo at github.com <a href="https://github.com/alecbennett/projects/tree/master/choropleth">here</a>. The GeoJSON file used here is based on the "us-states" file produced by <a href="http://bost.ocks.org/mike/">Mike Bostock</a> from his <a href="http://bost.ocks.org/mike/leaflet/">D3 + Leaflet</a> tutorial.</p>
 	</div>
 

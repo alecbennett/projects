@@ -17,7 +17,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	<script type="text/javascript" src="../jsmaptools/js/jsmaptools.js"></script>
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
 	 <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
-	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" type="text/javascript"></script>
 	<div id="map_wrapper" style="width: 100%; position: relative; height: 500px;">
 		<div id="map" style="border: 1px solid #999; height: 100%; width: 100%; float: right;">
 			<noscript><div class="noScriptDemo">JavaScript Must Be Enabled for this demo</div></noscript>	
@@ -32,8 +31,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 		<p>
 		The following snippet uses $.getJSON() to simplify the code, but be warned that this can cause issues with loading since the default is asynchronous. 
 		</p>
-				<?prettify?>
-<pre lang="javascript" style="font-size: 14px;">
+<pre style="font-size: 14px;"><code>
 $.getJSON(jsonFile, function(layers) {     
 	var polyList = [];
 	for (var i = 0; i &lt; layers.features[0].geometry.coordinates[0].length; i++){
@@ -43,7 +41,7 @@ $.getJSON(jsonFile, function(layers) {
 	}
 	mt.addPolygon(polyList);
 });
-</pre>
+</code></pre>
 	<p>Full source code is available via the projects repo at github.com <a href="https://github.com/alecbennett/projects/tree/master/loadgeojson">here</a>. The polgyon used in this example is quite simplistic, but the code also works well with much more complex files.</p>
 	</div>
 
