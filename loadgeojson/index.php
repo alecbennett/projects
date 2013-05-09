@@ -58,8 +58,7 @@ $.getJSON(jsonFile, function(layers) {
 			map.addLayer(mapLayer);
 
 			var mt = new MapTools(map);
-			mt.readGeoJSON("us-states.json");
-			mt.applyChoropleth('density','#ffff00', '#0000ff');
+
 		});
 
 	</script>
