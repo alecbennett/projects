@@ -54,7 +54,7 @@ $.getJSON(jsonFile, function(layers) {
 			var mapUrl='http://{s}.tile.cloudmade.com/' + apikey + '/94389/256/{z}/{x}/{y}.png';
 			var mapAttrib='Map data © OpenStreetMap contributors';
 			var mapLayer = new L.TileLayer(mapUrl, {minZoom: 3, maxZoom: 17, attribution: mapAttrib});
-			map.setView(new L.LatLng(50, -115),3);
+			map.setView(new L.LatLng(52, -115),3);
 			map.addLayer(mapLayer);
 
 			var mt = new MapTools(map);
