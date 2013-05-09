@@ -58,7 +58,7 @@ $.getJSON(jsonFile, function(layers) {
 			map.addLayer(mapLayer);
 
 			var mt = new MapTools(map);
-
+			mt.readGeoJSON("usa.geo.json");
 		});
 
 	</script>
