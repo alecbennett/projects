@@ -32,7 +32,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <pre style="font-size: 14px;"><code>
 var mt = new MapTools(map);
 mt.readGeoJSON("us-states.json");  //Explained <a href="/projects/loadgeojson/">here</a>.
-mt.applyChoropleth('income','#000000', '#00ff00');
+mt.applyChoropleth('income','#ffffcc', '#006837');
 </pre></code>
 	<p>The majority of the work in this case is done through the applyChoropleth function. The function takes as arguments the property you intend to apply the gradient to, the low value color, and the high value color, currently in 6 digit hex code, such as: <code>#000000</code>. The function loops through each feature to find the min/max of the desired property.  After that, it applies the proper color value to the gradient between the two end values. The function itself looks like this:</p>
 <pre style="font-size: 14px;"><code>
