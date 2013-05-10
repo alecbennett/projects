@@ -113,7 +113,7 @@ function applyChoropleth(prop, lowcolor, highcolor){
 
 			var mt = new MapTools(map);
 			mt.readGeoJSON("us-states.json");
-			mt.applyChoropleth('income','#000000', '#00ff00');
+			mt.applyChoropleth('income','#ffffcc', '#006837');
 			for (var i = 0; i < mt.features.length; i++){
 				if (mt.features[i].type == "Polygon" || mt.features[i].type == "MultiPolygon"){
 					mt.features[i].p.bindPopup("<div style='font-size: 14px;'>2011 Mean annual household income " + mt.features[i].properties.name + ": <b>$" + mt.features[i].properties.income.toString().substring(0,2) + "," + mt.features[i].properties.income.toString().substring(2,5) + "</b>.</div>");
