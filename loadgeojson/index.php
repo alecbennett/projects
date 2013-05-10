@@ -1,6 +1,6 @@
 <?php 
 	require_once("../../template.php");	
-	$page = new webPage("Polygon Selection");
+	$page = new webPage("GeoJSON Multi(Polygon) Layers");
 	$page->SiteHeader();
 ?>
 <div style="width: 100%; height:60px; margin-bottom: 10px;"><div style="display: inline-block;"><h1>GeoJSON Multi(Polygon) Layers</h1></div><div style="display: inline-block; width: 234px; height: 60px; float: right;"><script type="text/javascript"><!--
