@@ -22,8 +22,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 			<noscript><div class="noScriptDemo">JavaScript Must Be Enabled for this demo</div></noscript>	
 		</div>
 		<div style="position: absolute; bottom: 10px; left: 10px;">
-			<input type="button" value="Density" id="density" />
-			<input type="button" value="Homicide" id="homicide" />
 		</div>
 	</div>
 
@@ -34,7 +32,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <pre style="font-size: 14px;"><code>
 var mt = new MapTools(map);
 mt.readGeoJSON("us-states.json");  //Explained <a href="/projects/loadgeojson/">here</a>.
-mt.applyChoropleth('murder','#ffff00', '#ff0000');
+mt.applyChoropleth('income','#000000', '#00ff00');
 </pre></code>
 	<p>The majority of the work in this case is done through the applyChoropleth function. The function takes as arguments the property you intend to apply the gradient to, the low value color, and the high value color, currently in 6 digit hex code, such as: <code>#000000</code>. The function loops through each feature to find the min/max of the desired property.  After that, it applies the proper color value to the gradient between the two end values. The function itself looks like this:</p>
 <pre style="font-size: 14px;"><code>
@@ -68,9 +66,23 @@ function applyChoropleth(prop, lowcolor, highcolor){
 		// Store property value
 		var pv = eval("v.properties." + prop);
 		// Determine color value within range
-		var c_r = Math.round(pv * scale_r + min_r).toString(16);    
-		var c_g = Math.round(pv * scale_g + min_g).toString(16);
-		var c_b = Math.round(pv * scale_b + min_b).toString(16);
+		if (scale_r &lt; 0){
+			//Check if scaling from a high hex value down
+			var c_r = Math.round(max_r - (max - pv) * scale_r).toString(16);
+		} else {
+			//If scaling from low hex value up
+			var c_r = Math.round((pv - min) * scale_r + min_r).toString(16); 
+		}
+		if (scale_g &lt; 0){
+			var c_g = Math.round(max_g - (max - pv) * scale_g).toString(16);
+		} else {
+			var c_g = Math.round((pv - min) * scale_g + min_g).toString(16);
+		}
+		if (scale_b &lt; 0){
+			var c_b = Math.round(max_b - (max - pv) * scale_b).toString(16);
+		} else {
+			var c_b = Math.round((pv - min) * scale_b + min_b).toString(16);
+		}
 		// Add padding if needed
 		if (c_r.length &lt; 2){ c_r = "0" + c_r; }
 		if (c_g.length &lt; 2){ c_g = "0" + c_g; }
@@ -86,7 +98,7 @@ function applyChoropleth(prop, lowcolor, highcolor){
 
 </code></pre>
 
-	<p>Full source code is available via the projects repo at github.com <a href="https://github.com/alecbennett/projects/tree/master/choropleth">here</a>. The GeoJSON file used here is based on the "us-states" file produced by <a href="http://bost.ocks.org/mike/">Mike Bostock</a> from his <a href="http://bost.ocks.org/mike/leaflet/">D3 + Leaflet</a> tutorial.</p>
+	<p>Full source code is available via the projects repo at github.com <a href="https://github.com/alecbennett/projects/tree/master/choropleth">here</a>. The GeoJSON file used here is based on the "us-states" file produced by <a href="http://bost.ocks.org/mike/">Mike Bostock</a> from his <a href="http://bost.ocks.org/mike/leaflet/">D3 + Leaflet</a> tutorial.  Data was then obtained from Wikipedia for Mean annual household income in 2011, <a href="http://en.wikipedia.org/wiki/List_of_U.S._states_by_income">here</a>.</p>
 	</div>
 
 	<script type="text/javascript">
@@ -101,28 +113,12 @@ function applyChoropleth(prop, lowcolor, highcolor){
 
 			var mt = new MapTools(map);
 			mt.readGeoJSON("us-states.json");
-			mt.applyChoropleth('murder','#ffff00', '#ff0000');
-				for (var i = 0; i < mt.features.length; i++){
-					if (mt.features[i].type == "Polygon" || mt.features[i].type == "MultiPolygon"){
-						mt.features[i].p.bindPopup("<div style='font-size: 14px;'>2011 Murder Rate for " + mt.features[i].properties.name + ": <b>" + mt.features[i].properties.murder + "</b> per 100,000 people</div>");
-					}
+			mt.applyChoropleth('income','#000000', '#00ff00');
+			for (var i = 0; i < mt.features.length; i++){
+				if (mt.features[i].type == "Polygon" || mt.features[i].type == "MultiPolygon"){
+					mt.features[i].p.bindPopup("<div style='font-size: 14px;'>2011 Mean annual household income " + mt.features[i].properties.name + ": <b>$" + mt.features[i].properties.income.toString().substring(0,2) + "," + mt.features[i].properties.income.toString().substring(2,5) + "</b>.</div>");
 				}
-			$('#homicide').click(function(){
-				mt.applyChoropleth('murder','#ffff00', '#ff0000');
-				for (var i = 0; i < mt.features.length; i++){
-					if (mt.features[i].type == "Polygon" || mt.features[i].type == "MultiPolygon"){
-						mt.features[i].p.bindPopup("<div style='font-size: 14px;'>2011 Murder Rate for " + mt.features[i].properties.name + ": <b>" + mt.features[i].properties.murder + "</b> per 100,000 people</div>");
-					}
-				}
-			});
-			$('#density').click(function(){
-				mt.applyChoropleth('density','#0000ff', '#ff0000');
-				for (var i = 0; i < mt.features.length; i++){
-					if (mt.features[i].type == "Polygon" || mt.features[i].type == "MultiPolygon"){
-						mt.features[i].p.bindPopup("<div style='font-size: 14px;'>Population density for " + mt.features[i].properties.name + ": <b>" + mt.features[i].properties.density + "</b> per square mile.</div>");
-					}
-				}
-			});
+			}
 		});
 
 	</script>
