@@ -16,7 +16,9 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script></div></div>
 	<script type="text/javascript" src="../jsmaptools/js/jsmaptools.js"></script>
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
-	 <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+	<script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
 	<div id="map_wrapper" style="width: 100%; position: relative; height: 500px;">
 		<div id="map" style="border: 1px solid #999; height: 100%; width: 100%; float: right;">
 			<noscript><div class="noScriptDemo">JavaScript Must Be Enabled for this demo</div></noscript>	
@@ -45,16 +47,12 @@ $.getJSON(jsonFile, function(layers) {
 	<p>Full source code is available via the projects repo at github.com <a href="https://github.com/alecbennett/projects/tree/master/loadgeojson">here</a>. The polgyon used in this example is quite simplistic, but the code also works well with much more complex files.</p>
 	</div>
 
+
 	<script type="text/javascript">
 		$(document).ready(function(){
-			map = new L.Map('map');
-			var apikey = 'ea24b4e5fd234fe08d4250a1f833b308';
-			var mapUrl='http://{s}.tile.cloudmade.com/' + apikey + '/94389/256/{z}/{x}/{y}.png';
-			var mapAttrib='Map data © OpenStreetMap contributors';
-			var mapLayer = new L.TileLayer(mapUrl, {minZoom: 3, maxZoom: 17, attribution: mapAttrib});
-			map.setView(new L.LatLng(52, -115),3);
-			map.addLayer(mapLayer);
-
+			map = L.mapbox.map('map', 'alecbennett.he3o6a7i');
+                        map.setView(new L.LatLng(52, -115),3);
+		
 			var mt = new MapTools(map);
 			mt.readGeoJSON("usa.geo.json");
 		});

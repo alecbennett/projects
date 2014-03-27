@@ -15,8 +15,11 @@ google_ad_height = 60;
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script></div></div>
 	<script type="text/javascript" src="../jsmaptools/js/jsmaptools.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
 	 <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
 	<div id="map_wrapper" style="width: 100%; position: relative; height: 500px;">
 		<div id="map" style="border: 1px solid #999; height: 100%; width: 100%; float: right;">
 			<noscript><div class="noScriptDemo">JavaScript Must Be Enabled for this demo</div></noscript>	
@@ -103,13 +106,8 @@ function applyChoropleth(prop, lowcolor, highcolor){
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-			map = new L.Map('map');
-			var apikey = 'ea24b4e5fd234fe08d4250a1f833b308';
-			var mapUrl='http://{s}.tile.cloudmade.com/' + apikey + '/94389/256/{z}/{x}/{y}.png';
-			var mapAttrib='Map data © OpenStreetMap contributors';
-			var mapLayer = new L.TileLayer(mapUrl, {minZoom: 3, maxZoom: 17, attribution: mapAttrib});
-			map.setView(new L.LatLng(52, -115),3);
-			map.addLayer(mapLayer);
+			map = L.mapbox.map('map', 'alecbennett.he3o6a7i');
+                        map.setView(new L.LatLng(52, -115),3);
 
 			var mt = new MapTools(map);
 			mt.readGeoJSON("us-states.json");

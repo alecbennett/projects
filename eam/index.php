@@ -4,6 +4,8 @@
         $page->SiteHeader(); ?>
 		 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
 		 <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+		 <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+        	<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />	
 		<?php
 			echo "<script type='text/javascript'>";
 				if ($_GET['min']){

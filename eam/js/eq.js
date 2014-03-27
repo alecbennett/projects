@@ -4,13 +4,8 @@ var num = ( 3600 * 24 * 365 * 40);
 var markersArray = [];
 
 function initialize() {
-	map = new L.Map('map');
-	var apikey = 'ea24b4e5fd234fe08d4250a1f833b308';
-	var osmUrl='http://{s}.tile.cloudmade.com/' + apikey + '/94389/256/{z}/{x}/{y}.png';
-	var osmAttrib='Map data © OpenStreetMap contributors';
-	var osm = new L.TileLayer(osmUrl, {minZoom: 3, maxZoom: 12, attribution: osmAttrib});		
-	map.setView(new L.LatLng(50, -115),3);
-	map.addLayer(osm);
+	map = L.mapbox.map('map', 'alecbennett.he3o6a7i');
+	map.setView(new L.LatLng(52, -115),3);
 }
 function loadData(equrl){
 	$.ajax({
