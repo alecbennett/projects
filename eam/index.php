@@ -25,7 +25,15 @@
 				}, 60000);
 			});
 		</script>
-		<div><h2>Earthquake Activity Map (<?php echo date("F jS, Y h:i:s A T"); ?>)</h2></div>
+		<div style="width: 100%; height:60px; margin-bottom: 10px;"><div style="display: inline-block;"><h2>Earthquake Activity Map (<?php echo date("F jS, Y h:i:s A T"); ?>)</h2></div><div style="display: inline-block; width: 234px; height: 60px; float: right;"><script type="text/javascript"><!--
+		google_ad_client = "ca-pub-1195803658795155";
+		/* ProjectAd */
+		google_ad_slot = "2032017167";
+		google_ad_width = 234;
+		google_ad_height = 60;
+		//-->
+		</script>
+		<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script></div></div>
 		<div style="position: relative;">
 			<div id="map" style="height: 600px; width: 980px; margin: auto; border: 1px solid gray;">
 				<noscript><div class="noScriptDemo">JavaScript Must Be Enabled for this demo</div></noscript>	
